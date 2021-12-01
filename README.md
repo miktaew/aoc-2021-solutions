@@ -1,3 +1,3 @@
 # aoc-2021-solutions
 
-in Node.js
+Solutions for Advent of Code 2021, in Node.js
