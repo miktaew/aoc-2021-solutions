@@ -15,8 +15,7 @@ function day1() {
 
     ////////////////////////////////////////
     //part 2
-    for(let i = 3; i < data.length; i++)
-    {
+    for(let i = 3; i < data.length; i++) {
         if(data[i] - data[i-3] > 0) {
             answers["part 2"] += 1;
         }
