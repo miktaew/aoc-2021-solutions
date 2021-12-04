@@ -24,22 +24,17 @@ function day4() {
 
     var stop = false;
     var winners = [];
-    var first_winning_number = null;
-    var last_winning_number = null;
-
 
     for(let i = 0; i < numbers.length; i++) {
         for(let j = 0; j < boards.length; j++) {
 
-            if(winners.includes(j)) {continue;}
+            if(winners.some(val => val[0] == j)) {continue;}
 
             for(let k = 0; k < 5; k++) {
                 if(boards[j][k].filter(function(value){
                     return value.marked;
                 }).length == 5){
-                    if(!winners[0]) {first_winning_number = numbers[i-1];}
-                    winners.push(j);
-                    last_winning_number = numbers[i-1];
+                    winners.push([j, numbers[i-1]]);
                     break;
                 }
             }
@@ -50,14 +45,12 @@ function day4() {
                     }).filter(function(value){
                         return value.marked;
                     }).length == 5) {
-                        if(!winners[0]) {first_winning_number = numbers[i-1];}
-                        winners.push(j);
-                        last_winning_number = numbers[i-1]
+                        winners.push([j, numbers[i-1]]);
                         break;
                 }  
             }
 
-            if(winners.includes(j)) {continue; }
+            if(winners.some(val => val[0] == j)) {continue;}
 
             stop = false; 
             for(let k = 0; k < 5; k++) {
@@ -73,8 +66,8 @@ function day4() {
         }
     }
 
-    var first_winner_score = winner_score(boards[winners[0]], first_winning_number);
-    var last_winner_score = winner_score(boards[winners[winners.length-1]], last_winning_number);
+    var first_winner_score = winner_score(boards[winners[0][0]], winners[0][1]);
+    var last_winner_score = winner_score(boards[winners[winners.length-1][0]], winners[winners.length-1][1]);
 
     return {"part 1": first_winner_score,
             "part 2": last_winner_score};
