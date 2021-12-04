@@ -24,22 +24,21 @@ function day4() {
 
     var stop = false;
     var winners = [];
-    var first_winner = null;
     var first_winning_number = null;
-    var last_winner = null;
     var last_winning_number = null;
 
 
     for(let i = 0; i < numbers.length; i++) {
         for(let j = 0; j < boards.length; j++) {
+
             if(winners.includes(j)) {continue;}
+
             for(let k = 0; k < 5; k++) {
                 if(boards[j][k].filter(function(value){
                     return value.marked;
                 }).length == 5){
-                    if(!first_winner) {first_winner = j; first_winning_number = numbers[i-1];}
+                    if(!winners[0]) {first_winning_number = numbers[i-1];}
                     winners.push(j);
-                    last_winner = j;
                     last_winning_number = numbers[i-1];
                     break;
                 }
@@ -51,15 +50,14 @@ function day4() {
                     }).filter(function(value){
                         return value.marked;
                     }).length == 5) {
-                        if(!first_winner) {first_winner = j; first_winning_number = numbers[i-1];}
+                        if(!winners[0]) {first_winning_number = numbers[i-1];}
                         winners.push(j);
-                        last_winner = j;
                         last_winning_number = numbers[i-1]
                         break;
                 }  
             }
 
-            if(j == first_winner || winners.includes(j)) {continue; }
+            if(winners.includes(j)) {continue; }
 
             stop = false; 
             for(let k = 0; k < 5; k++) {
@@ -75,8 +73,8 @@ function day4() {
         }
     }
 
-    var first_winner_score = winner_score(boards[first_winner], first_winning_number);
-    var last_winner_score = winner_score(boards[last_winner], last_winning_number);
+    var first_winner_score = winner_score(boards[winners[0]], first_winning_number);
+    var last_winner_score = winner_score(boards[winners[winners.length-1]], last_winning_number);
 
     return {"part 1": first_winner_score,
             "part 2": last_winner_score};
