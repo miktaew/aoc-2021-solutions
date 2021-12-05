@@ -1,24 +1,17 @@
 const fs = require('fs');
 
 function day4() {
-    const data = fs.readFileSync('day4/input.txt', 'utf8').split("\n").filter(function(value) {
-        return value !== "";
-    });
+    const data = fs.readFileSync('day4/input.txt', 'utf8').split("\n").filter(value => value !== "");
 
-    const numbers = data[0].split(",").map(function(value) {
-        return parseInt(value);
-    });
+    const numbers = data[0].split(",").map(value => parseInt(value));
 
     const boards = [];
 
     for(let i = 1; i < data.length/5; i++) {
         boards[i-1] = [];
         for(let j = 0; j < 5; j++) {
-            boards[i-1].push(data[i*5 + j - 4].split(" ").filter(function(value){ 
-                return value !== "";
-            }).map(function(value) {
-                return {number: parseInt(value), marked: false};
-            }));
+            boards[i-1].push(data[i*5 + j - 4].split(" ").filter(value => value !== "").
+                map(value => ({number: parseInt(value), marked: false})));
         }
     }
 
@@ -31,25 +24,13 @@ function day4() {
             if(winners.some(val => val[0] == j)) {continue;}
 
             for(let k = 0; k < 5; k++) {
-                if(boards[j][k].filter(function(value){
-                    return value.marked;
-                }).length == 5){
-                    winners.push([j, numbers[i-1]]);
-                    break;
+                if(boards[j].map(value => value[k]).filter(value => value.marked).length == 5
+                || boards[j][k].filter(value => value.marked).length == 5 ) {
+                        winners.push([j, numbers[i-1]]);
+                        break;
                 }
             }
             
-            for(let k = 0; k < 5; k++) {
-                if(boards[j].map(function(value){ 
-                        return value[k]; 
-                    }).filter(function(value){
-                        return value.marked;
-                    }).length == 5) {
-                        winners.push([j, numbers[i-1]]);
-                        break;
-                }  
-            }
-
             if(winners.some(val => val[0] == j)) {continue;}
 
             stop = false; 
@@ -66,11 +47,8 @@ function day4() {
         }
     }
 
-    var first_winner_score = winner_score(boards[winners[0][0]], winners[0][1]);
-    var last_winner_score = winner_score(boards[winners[winners.length-1][0]], winners[winners.length-1][1]);
-
-    return {"part 1": first_winner_score,
-            "part 2": last_winner_score};
+    return {"part 1": winner_score(boards[winners[0][0]], winners[0][1]),
+            "part 2": winner_score(boards[winners[winners.length-1][0]], winners[winners.length-1][1])};
 }
 
 function winner_score(winner_board, winning_number) {
