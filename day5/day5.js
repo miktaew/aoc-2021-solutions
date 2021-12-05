@@ -32,7 +32,7 @@ function day5() {
             }
         }
     }
-
+ 
     return {"part 1": lines_1.flat().filter(val => val > 1).length,
             "part 2": lines_2.flat().filter(val => val > 1).length};
 }
