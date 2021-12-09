@@ -3,8 +3,7 @@ const fs = require('fs');
 const depths = [];
 
 function day9() {
-    const data = fs.readFileSync('day9/input.txt', 'utf8').split("\n").map(value => value.split('').map(value => parseInt(value)));
-    data.pop(-1);
+    const data = fs.readFileSync('day9/input.txt', 'utf8').split("\n").map(value => value.split('').map(value => parseInt(value))).slice(0,-1);
 
     //part 1
     var risk_levels_low = 0;    
