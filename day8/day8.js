@@ -1,4 +1,3 @@
-const { count } = require('console');
 const fs = require('fs');
 
 function day8() {
@@ -47,7 +46,6 @@ function day8() {
             value += magic_pattern[output_segments[i][j]];
         }
         part_2 += parseInt(value);
-
     }
 
     return {"part 1": part_1,
