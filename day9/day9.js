@@ -18,9 +18,9 @@ function day9() {
             }
         }
     }
+    ////////////////
     //part 2
 
-    const start = new Date();
     for(let i = 0; i < data.length; i++) {
         depths[i] = [];
         for(let j = 0; j < data[0].length; j++) {
