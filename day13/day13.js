@@ -3,7 +3,6 @@ const fs = require('fs');
 var sheet;
 function day13() {
     const data = fs.readFileSync('day13/input.txt', 'utf8').split("\n").slice(0,-1);
-    //const data = fs.readFileSync('day13/example.txt', 'utf8').split("\n").map(value => value.replace("\r", "")).slice(0,-1);
 
     const points = [];
     const folds = [];
@@ -40,7 +39,7 @@ function day13() {
     }
 
     return {"part 1": part_1,
-            "part 2": null}
+            "part 2": "letters can be deciphered from console"}
 }
 
 function fold(axis, index) {
